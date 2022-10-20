@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:8080/api/products';
+  private baseUrl = 'http://localhost:8080/api/products';       
+  // private baseUrl = 'http://localhost:8080/api/products?size=100';     //Defaults to 20 items per page, use query to get more items
 
   constructor(private httpClient: HttpClient) {} //inject http client
 
@@ -17,7 +18,7 @@ export class ProductService {
   getProductList(): Observable<Product[]> {
     return this.httpClient
       .get<GetResponse>(this.baseUrl)
-      .pipe(map((response) => response._embedded.products));  //map is a special operator from the RXJS (Reactive JavaScript) module
+      .pipe(map((response) => response._embedded.products)); //map is a special operator from the RXJS (Reactive JavaScript) module
   }
 }
 
