@@ -11,6 +11,7 @@ import { Product } from 'src/app/common/product';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  currentCategoryId: number = 1;
 
   constructor(private productService: ProductService) {} //Inject our product service into constructor/component
 
