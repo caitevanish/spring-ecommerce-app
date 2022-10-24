@@ -11,8 +11,7 @@ import { map } from 'rxjs/operators';
 export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products';
   // private baseUrl = 'http://localhost:8080/api/products?size=100';     //Defaults to 20 items per page, use query to get more items
-  private categoryUrl='http://localhost:8080/api/product-category';
-
+  private categoryUrl = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) {} //inject http client
 
@@ -21,16 +20,28 @@ export class ProductService {
   getProductList(theCategoryId: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`; //calling new URL on Spring Boot app (ProductRepository.java)
 
+    return this.getProducts(searchUrl); 
+  }
+
+  SearchProducts(theKeyword: string): Observable<Product[]> {
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`; //Build url based on keyword
+
+    return this.getProducts(searchUrl);
+  }
+  
+  //refactored to a private method to reduce code redundancy, ie. a code smell! 
+  private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient
       .get<GetResponseProducts>(searchUrl)
-      .pipe(map((response) => response._embedded.products)); //map is a special operator from the RXJS (Reactive JavaScript) module
+      .pipe(map((response) => response._embedded.products));  //map is a special operator from the RXJS (Reactive JavaScript) module
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient
-      .get<GetResponseProductCategory>(this.categoryUrl)    //call REST API
+      .get<GetResponseProductCategory>(this.categoryUrl) //call REST API
       .pipe(map((response) => response._embedded.productCategory)); //REturns an observable
   }
+
 }
 
 // add supporting interface to help with mapping

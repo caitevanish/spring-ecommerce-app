@@ -1,3 +1,4 @@
+import { SearchComponent } from './../search/search.component';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/common/product';
@@ -12,6 +13,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   currentCategoryId: number = 1;
   currentCategoryName: string = '';
+  searchMode: boolean = false;
 
   constructor(
     private productService: ProductService, //Inject our product service into constructor/component
@@ -25,6 +27,27 @@ export class ProductListComponent implements OnInit {
   }
 
   listProducts(): void {
+    //if in search mode, call method 1 OR method 2
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    if (this.searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.handleListProducts();
+    }
+  }
+
+  handleSearchProducts() {
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    //now search for products using keyword
+    //define the SearchProducts method in Product services
+    this.productService.SearchProducts(theKeyword).subscribe((data) => {
+      this.products = data;
+    });
+  }
+
+  //Refactored code: moved method implementation from listProducts to handleListProducts
+  handleListProducts() {
     //check if "id" param is available
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
