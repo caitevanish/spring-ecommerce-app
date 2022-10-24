@@ -1,1 +1,16 @@
-<p>search works!</p>
+<div class="form-header">
+  <!-- 
+  #myInput = template variable
+  (keyup.enter) = event binder. will listen for event(enter), then call method in Angular code(doSearch); passes in text user passed in into text field
+  -->
+
+  <input
+    #myInput
+    placeholder="Search for products ..."
+    class="au-input au-input-xl"
+    (keyup.enter)="doSearch(myInput.value)"
+  />
+  <button (click)="doSearch(myInput.value)" class="au-btn-submit">
+    Search
+  </button>
+</div>
