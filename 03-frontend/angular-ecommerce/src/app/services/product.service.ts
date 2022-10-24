@@ -20,7 +20,7 @@ export class ProductService {
   getProductList(theCategoryId: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`; //calling new URL on Spring Boot app (ProductRepository.java)
 
-    return this.getProducts(searchUrl); 
+    return this.getProducts(searchUrl);
   }
 
   SearchProducts(theKeyword: string): Observable<Product[]> {
@@ -28,12 +28,12 @@ export class ProductService {
 
     return this.getProducts(searchUrl);
   }
-  
-  //refactored to a private method to reduce code redundancy, ie. a code smell! 
+
+  //refactored to a private method to reduce code redundancy, ie. a code smell!
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient
       .get<GetResponseProducts>(searchUrl)
-      .pipe(map((response) => response._embedded.products));  //map is a special operator from the RXJS (Reactive JavaScript) module
+      .pipe(map((response) => response._embedded.products)); //map is a special operator from the RXJS (Reactive JavaScript) module
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
@@ -42,6 +42,14 @@ export class ProductService {
       .pipe(map((response) => response._embedded.productCategory)); //REturns an observable
   }
 
+  //get product details
+  getProduct(theProductId: number): Observable<Product> {
+    //need to build url based on product id
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+
+    //call rest api based on product url
+    return this.httpClient.get<Product>(productUrl);
+  }
 }
 
 // add supporting interface to help with mapping
