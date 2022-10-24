@@ -4,7 +4,9 @@
       <!-- To make menu dynamic, use of list item and ngFor -->
       <li *ngFor="let tempProductCategory of productCategories">
         <a
-          routerLink="/category/{{ tempProductCategory.id }}"
+          routerLink="/category/{{ tempProductCategory.id }}/{{
+            tempProductCategory.categoryName
+          }}"
           routerLinkActive="active-link"
           >{{ tempProductCategory.categoryName }}</a
         >

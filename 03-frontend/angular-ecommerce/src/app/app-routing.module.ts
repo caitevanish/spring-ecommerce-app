@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'category/:id', component: ProductListComponent }, //start from the most specific route all the way down to the most generic route
+  { path: 'category/:id/:name', component: ProductListComponent }, //start from the most specific route all the way down to the most generic route
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
