@@ -1,3 +1,4 @@
+import { ProductCategory } from './../common/product-category';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,6 +11,8 @@ import { map } from 'rxjs/operators';
 export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products';
   // private baseUrl = 'http://localhost:8080/api/products?size=100';     //Defaults to 20 items per page, use query to get more items
+  private categoryUrl='http://localhost:8080/api/product-category';
+
 
   constructor(private httpClient: HttpClient) {} //inject http client
 
@@ -19,15 +22,27 @@ export class ProductService {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`; //calling new URL on Spring Boot app (ProductRepository.java)
 
     return this.httpClient
-      .get<GetResponse>(searchUrl)
+      .get<GetResponseProducts>(searchUrl)
       .pipe(map((response) => response._embedded.products)); //map is a special operator from the RXJS (Reactive JavaScript) module
+  }
+
+  getProductCategories(): Observable<ProductCategory[]> {
+    return this.httpClient
+      .get<GetResponseProductCategory>(this.categoryUrl)    //call REST API
+      .pipe(map((response) => response._embedded.productCategory)); //REturns an observable
   }
 }
 
 // add supporting interface to help with mapping
-interface GetResponse {
+interface GetResponseProducts {
   _embedded: {
     products: Product[];
+  };
+}
+
+interface GetResponseProductCategory {
+  _embedded: {
+    productCategory: ProductCategory[];
   };
   /* 
 interface getresponse will help us unwrap the JSON
