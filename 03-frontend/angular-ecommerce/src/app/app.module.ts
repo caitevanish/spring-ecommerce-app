@@ -7,10 +7,11 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component'; //manually type this in
+import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
+import { SearchComponent } from './components/search/search.component'; //manually type this in
 
 @NgModule({
-  declarations: [AppComponent, ProductListComponent, PageNotFoundComponent, ProductCategoryMenuComponent],
+  declarations: [AppComponent, ProductListComponent, PageNotFoundComponent, ProductCategoryMenuComponent, SearchComponent],
   imports: [
     BrowserModule,
     HttpClientModule,  //service module provided by Angular that allows us to perform HTTP requests and easily manipulate those requests and their responses.

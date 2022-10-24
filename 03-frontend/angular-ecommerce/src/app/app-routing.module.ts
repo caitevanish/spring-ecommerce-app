@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: 'search/:keyword', component: ProductListComponent },
   { path: 'category/:id/:name', component: ProductListComponent }, //start from the most specific route all the way down to the most generic route
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],  //add imports and exports manually to make it work
+  imports: [RouterModule.forRoot(routes)], //add imports and exports manually to make it work
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
