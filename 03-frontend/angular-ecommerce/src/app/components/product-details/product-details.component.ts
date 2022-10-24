@@ -28,6 +28,8 @@ export class ProductDetailsComponent implements OnInit {
 
     this.productService.getProduct(theProductId).subscribe((data) => {
       this.product = data;
+      //race condition! HTML template attempting to access property: product.imageUrl
+      //propert is not assigned a value UNTIL data arrives from the ProductService method call
     });
   }
 }
