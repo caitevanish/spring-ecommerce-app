@@ -3,6 +3,7 @@ import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/common/product';
 import { ActivatedRoute } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-list',
@@ -18,7 +19,7 @@ export class ProductListComponent implements OnInit {
 
   //new properties for paginagtion
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
 
   constructor(
@@ -94,5 +95,10 @@ export class ProductListComponent implements OnInit {
         this.thePageSize = data.page.size;
         this.theTotalElements = data.page.totalElements;
       });
+  }
+  updatePageSize(pageSize: string) {
+    this.thePageSize = +pageSize; //convert from string to num
+    this.thePageNumber = 1;
+    this.listProducts();
   }
 }
