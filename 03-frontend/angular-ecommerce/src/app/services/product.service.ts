@@ -43,6 +43,19 @@ export class ProductService {
     return this.getProducts(searchUrl);
   }
 
+  searchProductsPaginate(
+    thePage: number,
+    thePageSize: number,
+    theKeywordId: string  //changing to string from num
+  ): Observable<GetResponseProducts> {
+    //need to build url based on keyword, page and size
+    const searchUrl =
+      `${this.baseUrl}/search/findByNameContaining?name=${theKeywordId}` +
+      `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
+
   //refactored to a private method to reduce code redundancy, ie. a code smell!
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient
