@@ -1,3 +1,5 @@
+import { CartItem } from './../../common/cart-item';
+import { CartService } from './../../services/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private CartService: CartService,
     private route: ActivatedRoute
   ) {}
 
@@ -31,5 +34,12 @@ export class ProductDetailsComponent implements OnInit {
       //race condition! HTML template attempting to access property: product.imageUrl
       //propert is not assigned a value UNTIL data arrives from the ProductService method call
     });
+  }
+  addToCart() {
+    console.log(
+      `Adding to cart: ${this.product.name}, ${this.product.unitPrice}`
+    );
+    const theCartItem = new CartItem(this.product);
+    this.CartService.addToCart(theCartItem);  //by the time it is added to cart product is loaded with data
   }
 }
