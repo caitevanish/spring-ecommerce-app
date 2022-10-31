@@ -43,3 +43,4 @@ export class ProductDetailsComponent implements OnInit {
     this.CartService.addToCart(theCartItem);  //by the time it is added to cart product is loaded with data
   }
 }
+``
