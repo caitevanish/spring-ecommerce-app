@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent implements OnInit {
-  CartItems: CartItem[] = [];
+  cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
@@ -19,7 +19,7 @@ export class CartDetailsComponent implements OnInit {
   }
   listCartDetails() {
     //get a handle to cart items
-    this.CartItems = this.cartService.cartItems;
+    this.cartItems = this.cartService.cartItems;
 
     //subscribe to the cart totalPrice
     this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
