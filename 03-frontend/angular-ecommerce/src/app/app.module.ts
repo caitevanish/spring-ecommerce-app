@@ -13,6 +13,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,14 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule, //service module provided by Angular that allows us to perform HTTP requests and easily manipulate those requests and their responses.
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService], //add refernce to our ProductService. Allows us to inject given service into other parts of our application
   bootstrap: [AppComponent],
