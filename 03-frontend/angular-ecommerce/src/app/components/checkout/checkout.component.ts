@@ -10,6 +10,9 @@ export class CheckoutComponent implements OnInit {
   //form group is a collection of form controls of form elements or other groups
   checkoutFormGroup!: FormGroup;
 
+  totalPrice: number = 0;
+  totalQuantity: number = 0;
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
