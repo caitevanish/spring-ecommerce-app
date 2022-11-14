@@ -1,3 +1,4 @@
+import { EcommerceFormService } from './services/e-commerce-form.service';
 import { ProductService } from './services/product.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [ProductService], //add refernce to our ProductService. Allows us to inject given service into other parts of our application
+  providers: [ProductService, EcommerceFormService], //add refernce to our ProductService. Allows us to inject given service into other parts of our application
   bootstrap: [AppComponent],
 })
 export class AppModule {}
