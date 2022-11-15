@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -23,10 +22,11 @@ export class EcommerceFormService {
 
   getStates(theCountryCode: string): Observable<State[]> {
     //search url
-    const searchStatesUrl = `${this.statesUrl}/search/findByCountryCode?code=${theCountryCode}`;
+    const searchStatesUrl = `${this.statesUrl}search/findByCountryCode?code=${theCountryCode}`;
 
-    return this.httpClient.get<GetResponseStates>(searchStatesUrl).pipe(map((response)=> response._embedded.states))
-    
+    return this.httpClient
+      .get<GetResponseStates>(searchStatesUrl)
+      .pipe(map((response) => response._embedded.states));
   }
 
   getCreditCardMonths(startMonth: number): Observable<number[]> {
