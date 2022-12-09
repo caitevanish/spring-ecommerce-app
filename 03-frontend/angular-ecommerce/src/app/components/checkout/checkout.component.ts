@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
+import { EcommerceValidators } from 'src/app/validators/ecommerce-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -40,14 +41,17 @@ export class CheckoutComponent implements OnInit {
         firstName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          EcommerceValidators.notOnlyWhiteSpace,
         ]),
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          EcommerceValidators.notOnlyWhiteSpace,
         ]),
         email: new FormControl('', [
           Validators.required,
-          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ]),
       }),
       shippingAddress: this.formBuilder.group({
         street: [''],
@@ -99,10 +103,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   //Getters
-  get firstName(){return this.checkoutFormGroup.get('customer.firstName')}
-  get lastName(){return this.checkoutFormGroup.get('customer.lastName')}
-  get email(){return this.checkoutFormGroup.get('customer.email')}
-
+  get firstName() {
+    return this.checkoutFormGroup.get('customer.firstName');
+  }
+  get lastName() {
+    return this.checkoutFormGroup.get('customer.lastName');
+  }
+  get email() {
+    return this.checkoutFormGroup.get('customer.email');
+  }
 
   copyShippingAddressToBillingAddress(event) {
     if (event.target.checked) {
@@ -121,7 +130,7 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     console.log('Handling the submit button');
 
-    if(this.checkoutFormGroup.invalid){
+    if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
     }
 
