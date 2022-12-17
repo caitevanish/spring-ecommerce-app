@@ -1,6 +1,6 @@
 import { CartItem } from './../common/cart-item';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,8 @@ export class CartService {
   //Subject is a subclass of Observable
   //use Sublish to puclish events in code
   //event will be sent to all subscribers
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   constructor() {}
   addToCart(theCartItem: CartItem) {
